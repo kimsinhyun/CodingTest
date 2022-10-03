@@ -1,0 +1,34 @@
+11
+_ _ T T T T
+_ _ _ T T M
+_ _ T F M M
+A A F R M T
+_ _ N A M T
+_ _ T A F J
+
+F T T F F F 
+F T T T F F 
+F F T T F F 
+F F F F F F 
+F T T F F F 
+F T T F F F 
+
+
+4
+_ _ _ _ T T
+_ _ _ _ _ M
+_ _ T F M M
+A A F R M T
+_ _ N A M T
+_ _ T A F J
+
+F F F T T F 
+F F F T T F 
+F F F F F F 
+F F F F F F 
+F F F F F F 
+F F F F F F 
+
+
+0
+15
