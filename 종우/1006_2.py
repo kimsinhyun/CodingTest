@@ -9,7 +9,7 @@ n = int(input())
 
 fibvals=[0,1]
 def fib(n):
-    if n < len(fibvals):
+    if n < len(fibvals):   
         return fibvals[n]
     else:
         # difference bw normal fib and dp fib is here
