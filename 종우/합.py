@@ -1,3 +1,4 @@
+# 1004_2
 # 백준 연습
 # 합
 # https://www.acmicpc.net/problem/8393
