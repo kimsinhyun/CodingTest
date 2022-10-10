@@ -1,24 +1,3 @@
-// 효율성 테스트 에러
-// function solution(n) {
-//   var answer = 0;
-//   for (let i = 2; i <= n; i++) {
-//     let sqrtNum = Math.floor(Math.sqrt(i));
-//     let isDecimal = true;
-//     while (sqrtNum > 1) {
-//       if (i % sqrtNum === 0) {
-//         isDecimal = false;
-//         break;
-//       } else {
-//         sqrtNum--;
-//       }
-//     }
-//     if (isDecimal) {
-//       answer++;
-//     }
-//   }
-//   return answer;
-// }
-
 //에라토스 테네스체 알고리즘
 function solution(n) {
   let answer = 0;
@@ -43,3 +22,5 @@ function solution(n) {
   }
   return answer;
 }
+
+solution(50);

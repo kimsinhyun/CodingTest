@@ -1,21 +1,15 @@
-function makeArmy() {
-  let shooters = [];
-
-  let i = 0;
-  while (i < 10) {
-    let j = i;
-    let shooter = function () {
-      // shooter 함수
-      console.log(j); // 몇 번째 shooter인지 출력해줘야 함
-    };
-    shooters.push(shooter);
-    i++;
-  }
-
-  return shooters;
+function askPassword(ok, fail) {
+  let password = prompt("비밀번호를 입력해주세요.", "");
+  if (password == "rockstar") ok();
+  else fail();
 }
 
-let army = makeArmy();
+let user = {
+  name: "John",
 
-army[0](); // 0번째 shooter가 10을 출력함
-army[5]();
+  login(result) {
+    alert(this.name + (result ? " 로그인 성공" : " 로그인 실패"));
+  },
+};
+
+askPassword(user.login.bind(user, true), user.login.bind(user, false)); // ?
