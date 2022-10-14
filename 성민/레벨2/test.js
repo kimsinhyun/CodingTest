@@ -1,15 +1,22 @@
-function askPassword(ok, fail) {
-  let password = prompt("비밀번호를 입력해주세요.", "");
-  if (password == "rockstar") ok();
-  else fail();
+function sum(a) {
+  let currentSum = a;
+
+  function f(b) {
+    currentSum += b;
+    return f;
+  }
+
+  f.toString = function () {
+    return currentSum;
+  };
+  f.valueOf = function () {
+    return currentSum;
+  };
+
+  return f;
 }
 
-let user = {
-  name: "John",
-
-  login(result) {
-    alert(this.name + (result ? " 로그인 성공" : " 로그인 실패"));
-  },
-};
-
-askPassword(user.login.bind(user, true), user.login.bind(user, false)); // ?
+console.log(String(sum(1)(2))); // 3
+console.log(String(sum(5)(-1)(2))); // 6
+console.log(String(sum(6)(-1)(-2)(-3))); // 0
+console.log(String(sum(0)(1)(2)(3)(4)(5))); // 15
