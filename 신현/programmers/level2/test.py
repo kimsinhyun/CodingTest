@@ -1,23 +1,33 @@
-def bfs(route,maps):
-    visited = [[False] * len(maps[0]) for _ in range(len(maps))]
-    from collections import deque
-    q = deque([[0,0]])
-    while q:
-        v_i,v_j = q.popleft()
-        visited[v_i][v_j] = True
-        for i,j in route:
-            n_i = v_i+i
-            n_j = v_j+j
-            if  (0<=n_j<len(maps[0]))\
-                and (0<=n_i<len(maps))\
-                and (maps[n_i][n_j]==1\
-                and not visited[n_i][v_j+j]):
-                visited[n_i][n_j] = True
-                maps[n_i][n_j] = maps[v_i][v_j] + 1
-                q.append([n_i,n_j])
+from itertools import combinations_with_replacement
+from collections import Counter
+
+def solution(n, info):
+    max_diff, max_comb_cnt = 0, {}
+
+    for comb in combinations_with_replacement(range(11), n):
+        cnt = Counter(comb)
+        score1, score2 = 0, 0
+        print(cnt)
+        for i in range(1, 11):
+            if info[10-i] < cnt[i]:
+                score1 += i
+            elif info[10-i] > 0:
+                score2 += i
+                
+        diff = score1 - score2
+        if diff > max_diff:
+            max_comb_cnt = cnt
+            max_diff = diff
             
-def solution(maps):
-    route = [[1,0],[-1,0],[0,1],[0,-1]]
-    print(route)
-    bfs(route, maps)
-    return maps[len(maps)-1][len(maps[0])-1] if maps[len(maps)-1][len(maps[0])-1]!=1 else -1
+    if max_diff > 0:
+        answer = [0]*11
+        for n in max_comb_cnt:
+            answer[10-n] = max_comb_cnt[n] 
+        return answer 
+    else:
+        return [-1]
+
+test = solution(5,[2,1,1,1,0,0,0,0,0,0,0])
+# test = solution(10, [0,0,0,0,0,0,0,0,3,4,3])
+print()
+print(test)
