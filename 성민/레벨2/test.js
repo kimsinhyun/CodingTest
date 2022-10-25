@@ -1,21 +1,22 @@
-function makeArmy() {
-  let shooters = [];
+function sum(a) {
+  let currentSum = a;
 
-  let i = 0;
-  while (i < 10) {
-    let j = i;
-    let shooter = function () {
-      // shooter 함수
-      console.log(j); // 몇 번째 shooter인지 출력해줘야 함
-    };
-    shooters.push(shooter);
-    i++;
+  function f(b) {
+    currentSum += b;
+    return f;
   }
 
-  return shooters;
+  f.toString = function () {
+    return currentSum;
+  };
+  f.valueOf = function () {
+    return currentSum;
+  };
+
+  return f;
 }
 
-let army = makeArmy();
-
-army[0](); // 0번째 shooter가 10을 출력함
-army[5]();
+console.log(String(sum(1)(2))); // 3
+console.log(String(sum(5)(-1)(2))); // 6
+console.log(String(sum(6)(-1)(-2)(-3))); // 0
+console.log(String(sum(0)(1)(2)(3)(4)(5))); // 15

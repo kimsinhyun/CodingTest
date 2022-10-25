@@ -1,4 +1,5 @@
 # JadenCase 문자열 만들기
+# 10.03
 # https://school.programmers.co.kr/learn/courses/30/lessons/12951
 
 def solution(s):

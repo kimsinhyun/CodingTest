@@ -1,3 +1,4 @@
+# 1004_4
 # 나머지 (백준)
 # https://www.acmicpc.net/problem/10430
 

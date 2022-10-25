@@ -1,3 +1,4 @@
+# 1006_2
 # 피보나치 수 5 (백준)
 # https://www.acmicpc.net/problem/10870
 

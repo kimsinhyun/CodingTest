@@ -1,3 +1,4 @@
+# 1004_3
 # 팩토리얼(백준)
 # https://www.acmicpc.net/problem/10872
 
