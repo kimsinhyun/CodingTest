@@ -3,4 +3,12 @@
 
 def solution(numbers, target):
     answer = 0
-    return answer
+    sums = [numbers[0], -numbers[0]]
+    numbers.pop(0)
+    for i in numbers:
+        tmp = []
+        for j in sums:
+            tmp.append(j+i)
+            tmp.append(j-i)
+        sums = tmp
+    return tmp.count(target)
