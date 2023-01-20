@@ -2,15 +2,11 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/43162
 
 
-# my incomplete solution
-# 1. max number of networks = n
-# 2. every connection subtract 1 from n
-# 3. should be dfs
-# 4. should implement as bfs
-# 5. should be connected from both sides
+# my fixed solution
+# 1. counting trees in graph
 def solution(n, computers):
     visited = []
-    answer = n
+    answer = 0
     
     for i in range(n):
         if i not in visited:
@@ -19,10 +15,9 @@ def solution(n, computers):
                 cur = q.pop(0)
                 visited.append(cur)
                 for j in range(n):
-                    if computers[cur][j] == 1 and computers[j][cur]  == 1 and j not in visited:
+                    if computers[cur][j] == 1 and j not in visited:
                         q.append(j)
-                        answer -= 1
-    
+            answer += 1
     return answer
 
 
