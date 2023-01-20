@@ -1,4 +1,1 @@
-import math
-
-n = int(input())
-print(math.factorial(n))
+gra2coms({0:{0,1},1:{1}})
