@@ -5,13 +5,20 @@ def solution(msg):
     dictionary = {}
     answer = []
     longest = 1
+    trk = 27
     tmp = ""
-    for ch in msg:
+    for j, ch in enumerate(msg):
         if len(tmp) < longest:
             tmp += ch
             continue
         for i in range(longest):
             lk = tmp[:longest-i]
-            print(lk)
+            if len(lk) == 1:
+                answer.append(ord('A')-64)
+                tmp = ""
+                trk += 1
+            elif lk in dictionary:
+                answer.append(dictionary[lk])
+                tmp = tmp[longest-i:]
                 
     return answer
