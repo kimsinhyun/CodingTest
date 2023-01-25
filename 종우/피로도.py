@@ -15,6 +15,7 @@ def solution(k, dungeons):
                 life -= dungeons[j][1]
             else:
                 break
+        if n_d == len(dungeons): return n_d
         if n_d > max_d:
             max_d = n_d
     return max_d
@@ -23,7 +24,6 @@ def solution(k, dungeons):
 answer = 0
 N = 0
 visited = []
-
 
 def dfs(k, cnt, dungeons):
     global answer
@@ -35,7 +35,6 @@ def dfs(k, cnt, dungeons):
             visited[j] = 1
             dfs(k - dungeons[j][1], cnt + 1, dungeons)
             visited[j] = 0
-
 
 def solution(k, dungeons):
     global N, visited
