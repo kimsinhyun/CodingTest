@@ -10,8 +10,8 @@ def solution(m, n, board):
             cur = board[i][j]
             r,b,d = board[i+1][j], board[i][j+1], board[i+1][j+1]
             
-            tn,tb,td = tracker[i+1][j], tracker[i][j+1], tracker[i+1][j+1]
-            if n != cur or b != cur or d != cur:
+            tr,tb,td = tracker[i+1][j], tracker[i][j+1], tracker[i+1][j+1]
+            if r != cur or b != cur or d != cur:
                 continue
             if tracker[i+1][j] == 0:
                 count += 1
