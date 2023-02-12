@@ -32,3 +32,42 @@ def solution(m, n, board):
     
     answer = 0
     return answer
+
+
+# answer
+def solution(m, n, board):
+    answer = 0
+    board = list(map(list, board))
+    
+    track = set()
+    while True:
+        for i in range(m-1):
+            for j in range(n-1):
+                block = board[i][j]
+                if block == []:
+                    continue
+                if board[i+1][j] == block and board[i][j+1] == block and board[i+1][j+1] == block:
+                    track.add((i,j))
+                    track.add((i+1,j))
+                    track.add((i, j+1))
+                    track.add((i+1,j+1))
+
+        if track:
+            answer += len(track)
+            for i, j in track:
+                board[i][j] = []
+            track = set()
+        else:
+            return answer
+        
+        while True:
+            moved = 0
+            for i in range(1, m):
+                for j in range(n):
+                    if not board[i][j] and board[i-1][j]:
+                        board[i][j] = board[i-1][j]
+                        board[i-1][j] = []
+                        moved = 1
+            if moved == 0:
+                break
+    return answer
