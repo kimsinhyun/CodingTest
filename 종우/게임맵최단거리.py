@@ -2,7 +2,7 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/1844
 
 
-# my attempt at bfs
+# my attempt at bfs 효율성x
 def solution(maps):
     answer = 0
     x_a = len(maps[0]); y_a = len(maps)
@@ -13,8 +13,8 @@ def solution(maps):
     
     while queue:
         x, y, l, track = queue.pop(0)
-        if x == x_a and y == y_a:
-            return l+1
+        if x == x_a-1 and y == y_a-1:
+            return l
         
         if x < x_a-1 and maps[y][x+1] == 1 and (x+1,y) not in track:
             track1 = track.copy()
