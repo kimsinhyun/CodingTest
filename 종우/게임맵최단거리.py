@@ -34,3 +34,28 @@ def solution(maps):
             queue.append((x-1, y, l+1, track4))
             
     return -1
+
+# cleaner bfs
+def solution(maps):
+    n, m = len(maps), len(maps[0])
+    visited = [[0 for _ in range(m)] for _ in range(n)]
+    queue = [(0,0)]
+    
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, 1, -1]
+    
+    visited[0][0] = 1
+    distance = {(0,0):1}
+    
+    while queue:
+        x, y = queue.pop(0)
+        for i in range(4):
+            nx = x+dx[i]
+            ny = y+dy[i]
+            if 0<=nx<n and 0<=ny<m and not visited[nx][ny] and maps[nx][ny]:
+                if nx == n-1 and ny == m-1:
+                    return distance[(x,y)]+1
+                queue.append((nx, ny))
+                distance[(nx,ny)] = distance[(x,y)]+1
+                visited[nx][ny] = 1
+    return -1
