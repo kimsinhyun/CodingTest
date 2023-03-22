@@ -26,3 +26,25 @@ def solution(n, times):
     rest = [tte[i]-times[i] if not v else 0 for i, v in enumerate(vacant)]
     answer += max(rest)
     return answer
+
+# 풀이
+def solution(n, times):
+    times.sort()
+    answer = 0
+    left = times[0]
+    right = n*times[-1]
+    
+    while(right>=left):
+        mid = int((right+left)/2)
+        total = 0
+        for i in times:
+            total += int(mid/i)
+    
+        if total >= n:
+            answer = mid
+            right = mid-1
+            
+        elif total < n:
+            left = mid+1
+    
+    return answer
