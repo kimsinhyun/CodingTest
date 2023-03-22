@@ -1,0 +1,28 @@
+# 0322
+# https://school.programmers.co.kr/learn/courses/30/lessons/43238
+
+# my initial (timeout)
+def solution(n, times):
+    answer = 0
+    vacant = [1] * len(times)
+    tte = [i for i in times]
+    
+    for i in range(n):
+        fastest = tte.index(min(tte))
+        
+        if vacant[fastest]:
+            vacant[fastest] = 0
+            tte[fastest] += times[fastest]
+        else:
+            toend = tte[fastest] - times[fastest]
+            answer += toend
+            for j in range(len(tte)):
+                tte[j] -= toend
+                if tte[j] <= times[j]:
+                    vacant[j] = 1
+            vacant[fastest] = 0
+            tte[fastest] += times[fastest]
+               
+    rest = [tte[i]-times[i] if not v else 0 for i, v in enumerate(vacant)]
+    answer += max(rest)
+    return answer
