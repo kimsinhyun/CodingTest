@@ -23,3 +23,26 @@ def solution(n, edge):
             
     
     return answer
+
+# solution
+def solution(n, edge):
+    answer = 0
+    adj = [[] for i in range(n+1)]
+    visited = [0]*(n+1)
+    
+    for a, b in edge:
+        adj[a].append(b)
+        adj[b].append(a)
+    
+    queue = [1]
+    visited[1] = 1
+    
+    while queue:
+        cur = queue.pop(0)
+        
+        for node in adj[cur]:
+            if not visited[node]:
+                visited[node] = visited[cur] +1
+                queue.append(node)
+    
+    return visited.count(max(visited))
