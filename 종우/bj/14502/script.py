@@ -3,6 +3,7 @@
 # https://www.acmicpc.net/problem/14502
 
 import sys
+import copy
 
 def countSafe(arr):
     safezones = 0
@@ -10,8 +11,9 @@ def countSafe(arr):
         safezones += s.count(0)
     return safezones
 
-def infect(arr):
+def infect(arrog):
     infected = True
+    arr = copy.deepcopy(arrog)
     while infected:
         infected = False
         for i in range(len(arr)):
@@ -25,20 +27,32 @@ def infect(arr):
                             infected = True
     return countSafe(arr)
 
+def block(arr, cnt):
+    global bestcase
+    if cnt == 3:
+        safe = infect(arr)
+        if safe > bestcase:
+            bestcase = safe
+        return
+
+    for i in range(len(arr)):
+        for j in range(len(arr[i])):
+            if arr[i][j] == 0:
+                arr[i][j] = 1
+                block(arr, cnt+1)
+                arr[i][j] = 0
+
+"""
+simulate expansion -> change this using bfs
+count safe zones
+find optimal blocking spaces -> just all combinations
+"""
+
 sys.stdin = open("test1.txt", "r")
 n,m = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(n)]
-
-"""
-simulate expansion
-count safe zones
-find optimal blocking spaces
-"""
-
 bestcase = 0
-for i in range(len(arr)):
-    for j in range(len(arr[i])):
-        if arr[i][j] == 0:
-            arr[i][j] = 1
-            sim = 
-            arr[i][j] = 1
+
+block (arr, 0)
+
+print(bestcase)
