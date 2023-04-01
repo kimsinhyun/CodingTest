@@ -12,19 +12,31 @@ def countSafe(arr):
     return safezones
 
 def infect(arrog):
-    infected = True
     arr = copy.deepcopy(arrog)
-    while infected:
-        infected = False
-        for i in range(len(arr)):
-            for j in range(len(arr[i])):
-                if arr[i][j] == 2:
-                    y1, y2, x1, x2 = i-1, i+1, j-1, j+1
-                    toinfect = [(y1, j), (y2, j), (i, x1), (i, x2)]
-                    for ti in toinfect:
-                        if ti[0] >= 0 and ti[0] < len(arr) and ti[1] >= 0 and ti[1] <len(arr[i]) and arr[ti[0]][ti[1]] != 1 and arr[ti[0]][ti[1]] != 2:
-                            arr[ti[0]][ti[1]] = 2
-                            infected = True
+    queue = []
+    global m, n
+    for i in range(n):
+        for j in range(m):
+            if arr[i][j] == 2:
+                queue.append((i,j))
+    
+    while queue:
+        i, j = queue.pop(0)
+        y1, y2, x1, x2 = i-1, i+1, j-1, j+1
+        # toinfect = [(y1, j), (y2, j), (i, x1), (i, x2)]
+        if y1 >= 0 and arr[y1][j] == 0:
+            queue.append((y1, j))
+            arr[y1][j] = 2
+        if y2 < n and arr[y2][j] == 0:
+            queue.append((y2, j))
+            arr[y2][j] = 2
+        if x1 >= 0 and arr[i][x1] == 0:
+            queue.append((i, x1))
+            arr[i][x1] = 2
+        if x2 < m and arr[i][x2] == 0:
+            queue.append((i, x2))
+            arr[j][x2] = 2
+
     return countSafe(arr)
 
 def block(arr, cnt):
