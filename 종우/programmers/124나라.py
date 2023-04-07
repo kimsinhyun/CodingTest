@@ -1,7 +1,7 @@
 # 0407
 # https://school.programmers.co.kr/learn/courses/30/lessons/12899#
 
-
+# initial solve
 def solution(n):
     answer = ''
     n -= 1
@@ -17,3 +17,4 @@ def solution(n):
         n -=1
     
     return answer
+
