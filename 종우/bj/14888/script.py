@@ -2,6 +2,9 @@
 # https://www.acmicpc.net/problem/14888
 # 0409
 
+
+# solve using permutations (시간초과)
+
 import sys
 import itertools
 
@@ -42,3 +45,4 @@ print(ceil)
 print(floor)
 
 
+# solve using dfs
