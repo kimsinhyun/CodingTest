@@ -20,15 +20,46 @@ def solution(topping):
     r = {}
     
     for t in topping:
-        if t not in l:
-            l[t] = 0
+        if t not in r:
             r[t] = 0
         r[t] += 1
     
     for t in topping:
-        l[t] += 1
+        if t not in l:
+            l[t] = 0
         r[t] -= 1
-        if fair(l, r):
-            answer += 1
+        # l[t] += 1
+        if r[t] == 0:
+            del l[t]
+        if len(r[t]) == len(l[t]):
+            answer +=1
+        if len(r[t]) < len(l[t]):
+            break
+        
+
+    return answer
+
+# just using numbers to compare
+def solution(topping):
+    answer = 0
+    l = {}
+    r = {}
     
+    for t in topping:
+        if t not in r:
+            r[t] = 0
+        r[t] += 1
+    
+    for t in topping:
+        if t not in l:
+            l[t] = 0
+        r[t] -= 1
+        if r[t] == 0:
+            del r[t]
+        if len(r) == len(l):
+            answer +=1
+        if len(r) < len(l):
+            break
+        
+
     return answer
