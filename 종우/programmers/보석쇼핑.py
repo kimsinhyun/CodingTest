@@ -28,4 +28,37 @@ def solution(gems):
     if rl - ll <= rr - lr:
         return [ll+1, rl+1]
     return [lr+1, rr+1]
+
+
+# two pointers that take into account all ranges
+def solution(gems):
+    answer = []
     
+    counter = {}
+    ranges = []
+    
+    start = 0
+    end = 0
+    
+    for g in set(gems):
+        counter[g] = 0
+    
+    while True:
+        if end == len(gems):
+            break
+        counter[gems[end]] += 1
+        if 0 not in counter.values():
+            while True:
+                counter[gems[start]] -= 1
+                start += 1
+                if counter[gems[start-1]] == 0:
+                    ranges.append([start, end+1])
+                    break
+        end += 1
+    
+    answer = ranges[0]
+    for r in ranges:
+        if r[1] - r[0] < answer[1] - answer[0]:
+            answer = r
+    
+    return answer
