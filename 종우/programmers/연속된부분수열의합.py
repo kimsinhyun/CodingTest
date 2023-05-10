@@ -26,3 +26,21 @@ def solution(sequence, k):
             break
                 
     return answer
+
+# better implementation using for loop
+def solution(sequence, k):
+    n = len(sequence)
+    answer = [0, n]
+    end = 0
+    part = sequence[0]
+    
+    for start in range(n):
+        while end+1 < n and part < k:
+            end += 1
+            part += sequence[end]
+        if part == k:
+            if end - start < answer[1] - answer[0]:
+                answer = [start, end]
+        part -= sequence[start]                
+                
+    return answer
