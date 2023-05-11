@@ -2,7 +2,7 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/12971#
 # dynamic programming
 
-# initial solve using dp and two pointers (incorrect)
+# initial solve using brute force and two pointers (incorrect)
 def solution(sticker):
     answer = 0
     length = len(sticker)
@@ -33,4 +33,22 @@ def solution(sticker):
             
     return answer
 
-
+# solve using dynamic programming
+def solution(sticker):
+    answer = 0
+    length = len(sticker)
+    if length ==1:
+        return sticker[0]
+    
+    dp = [[0]*length for _ in range(2)]
+    dp[0][0] = sticker[0]
+    dp[0][1] = sticker[0]
+    dp[1][1] = sticker[1]
+    
+    for i in range(2, length-1):
+        dp[0][i] = max(sticker[i]+dp[0][i-2], dp[0][i-1])
+    for i in range(2, length):
+        dp[1][i] = max(sticker[i]+dp[1][i-2], dp[1][i-1])
+    
+    answer = max(dp[0][length-2], dp[1][length-1])
+    return answer
