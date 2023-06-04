@@ -33,3 +33,30 @@ def substitute(s):
             newString += s[i]
     newString += s[-1]
     return newString
+
+# attempt at fix 
+import math
+
+def solution(m, musicinfos):
+    answer = None
+    m = m.replace("C#", 'c').replace("D#", 'd').replace("F#", 'f').replace("G#", 'g').replace("A#", 'a')
+    
+    for mi in musicinfos:
+        start, end, title, sheet = mi.split(',')
+        # get time
+        sh, sm = map(int, start.split(':'))
+        eh, em = map(int, end.split(':'))
+        time = (eh-sh)*60 + (em-sm)
+
+        music = sheet * math.ceil(time/len(sheet))
+        music = music[:time]
+        music = music.replace("C#", 'c').replace("D#", 'd').replace("F#", 'f').replace("G#", 'g').replace("A#", 'a')
+        
+        if m in music:
+            if answer == None:
+                answer = [time, title]
+            if time > answer[0]:
+                answer = [time, title]
+    
+    if answer:
+        return answer[1]
