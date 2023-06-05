@@ -48,11 +48,11 @@ def solution(m, musicinfos):
         eh, em = map(int, end.split(':'))
         time = (eh-sh)*60 + (em-sm)
 
-        music = sheet * math.ceil(time/len(sheet))
-        music = music[:time]
-        music = music.replace("C#", 'c').replace("D#", 'd').replace("F#", 'f').replace("G#", 'g').replace("A#", 'a')
+        sheet = sheet.replace("C#", 'c').replace("D#", 'd').replace("F#", 'f').replace("G#", 'g').replace("A#", 'a')
+        sheet = sheet * math.ceil(time/len(sheet))
+        sheet = sheet[:time]
         
-        if m in music:
+        if m in sheet:
             if answer == None:
                 answer = [time, title]
             if time > answer[0]:
@@ -60,3 +60,4 @@ def solution(m, musicinfos):
     
     if answer:
         return answer[1]
+    return "(None)"
