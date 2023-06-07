@@ -3,7 +3,7 @@
 # initial solve (barely passed) using backtracking
 # maybe another solution using iterator.combinations
 class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+    def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
         res = []
         cur = []
         
