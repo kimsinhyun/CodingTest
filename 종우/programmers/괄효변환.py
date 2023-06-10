@@ -29,7 +29,7 @@ def solution(p):
             tmp = "("
             tmp += makeProper(v)
             tmp += ")"
-            fu = flip(u)`
+            fu = flip(u)
             return tmp + fu
             
             
