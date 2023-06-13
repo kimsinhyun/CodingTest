@@ -1,5 +1,6 @@
 # 0525
 # https://school.programmers.co.kr/learn/courses/30/lessons/64062
+# 다시풀기
 
 # 효율성 x 
 def solution(stones, k):
@@ -24,8 +25,7 @@ def check(stones, k):
             return False
     return True
 
-# binary search
-
+# binary search solution
 def solution(stones, k):
     l, r = 1, 200_000_000
     
@@ -45,3 +45,21 @@ def solution(stones, k):
         else:
             l = m+1
     return l
+
+# max heap solution
+import heapq
+def solution(stones, k):
+    answer = 200_000_000
+    pq = []
+
+    for i in range(k):
+        heapq.heappush(pq, (-stones[i], i))
+    
+    for i in range(k, len(stones)):
+        heapq.heappush(pq, (-stones[i], i))
+        while(pq[0][1] < i-k+1):
+            heapq.heappop(pq)
+        answer = min(answer, -pq[0][0])
+    return answer
+
+print(solution([2, 4, 5, 3, 2, 1, 4, 2, 5, 1], 3))
