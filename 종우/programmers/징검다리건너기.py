@@ -24,4 +24,24 @@ def check(stones, k):
             return False
     return True
 
-# sliding window로 k 구간을 확인하고 heap으로 최대값
+# binary search
+
+def solution(stones, k):
+    l, r = 1, 200_000_000
+    
+    while l <= r:
+        m = (r + l) // 2
+        cnt = 0
+        for i in range(len(stones)):
+            if stones[i] - m <= 0:
+                cnt += 1
+            else:
+                cnt = 0
+            if cnt >= k:
+                break
+                
+        if cnt >= k:
+            r = m-1
+        else:
+            l = m+1
+    return l
