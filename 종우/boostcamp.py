@@ -29,10 +29,8 @@ def assign(arr):
     types = {"BOOL": ["#", 1], "SHORT" : ["##", 2], "FLOAT" : ["####", 4], "INT":["########", 8], "LONG":["########,########", 16]}
     memory = ""
     tmpUnit = ""
-    byteCount = 0
     
     for a in arr:
-        print(a)
         length = len(tmpUnit)
         if a == "SHORT":
             if length%2 != 0:
@@ -46,17 +44,23 @@ def assign(arr):
         if len(tmpUnit) == 8:
             memory += "," + tmpUnit
             tmpUnit = ""
-            print("mem", memory)
         
-        tmpUnit += types[a][0]
-        print("unit", tmpUnit)
-        byteCount += types[a][1]
-        if byteCount > 128:
+        if a == "LONG" or a == "INT":
+            memory += "," + types[a][0]
+        else:
+            tmpUnit += types[a][0]
+
+        if len(memory) > 128:
             return "HALT"
-    
+
+
+
     if len(tmpUnit) % 8 != 0:
-        tmpUnit += "."*(8-length)
-        memory += "," + tmpUnit
+            tmpUnit += "."*(8-length)
+            memory += "," + tmpUnit
     return memory[1:]
 
 print(assign(["INT", "INT", "BOOL", "SHORT", "LONG"]))
+print(assign(["INT", "SHORT", "FLOAT", "INT","BOOL"]))
+print(assign(["FLOAT", "SHORT", "BOOL", "BOOL", "BOOL", "INT"]))
+print(assign(["BOOL", "LONG", "SHORT", "LONG", "BOOL", "LONG", "BOOL", "LONG", "SHORT", "LONG", "LONG"]))
