@@ -1,5 +1,9 @@
 # 연산자 계산
-from itertools import permutations
+# https://school.programmers.co.kr/learn/courses/30/lessons/67257
+
+from collections import deque
+
+from collections import deque
 
 def solution(expression):
     
@@ -9,17 +13,50 @@ def solution(expression):
     operators = []
     
     def calc(prio):
-        tmp_operands = [:]
-        tmp_operators = [:]
+        operandsQ = deque(operands)
+        operatorsQ = deque(operators)
         final = 0
         
-        
-        
         for p in prio:
+            tmpOperands = deque()
+            tmpOperators = deque()
             if p == "*":
-                for tmp_operators:
-                    
-                
+                for o in operatorsQ:
+                    if o == "*":
+                        o1 = operandsQ.popleft()
+                        o2 = operandsQ.popleft()
+                        operandsQ.appendleft(o1*o2)
+                    else:
+                        tmpOperands.append(operandsQ.popleft())
+                        tmpOperators.append(o)
+                tmpOperands.append(operandsQ.popleft())
+                operandsQ = tmpOperands
+                operatorsQ = tmpOperators
+            elif p == "+":
+                for o in operatorsQ:
+                    if o == "+":
+                        o1 = operandsQ.popleft()
+                        o2 = operandsQ.popleft()
+                        operandsQ.appendleft(o1+o2)
+                    else:
+                        tmpOperands.append(operandsQ.popleft())
+                        tmpOperators.append(o)
+                tmpOperands.append(operandsQ.popleft())
+                operandsQ = tmpOperands
+                operatorsQ = tmpOperators
+            elif p == "-":
+                for o in operatorsQ:
+                    if o == "-":
+                        o1 = operandsQ.popleft()
+                        o2 = operandsQ.popleft()
+                        operandsQ.appendleft(o1-o2)
+                    else:
+                        tmpOperands.append(operandsQ.popleft())
+                        tmpOperators.append(o)
+                tmpOperands.append(operandsQ.popleft())
+                operandsQ = tmpOperands
+                operatorsQ = tmpOperators
+        return operandsQ.popleft()
     
     tmp = ""
     for e in expression:
@@ -43,6 +80,9 @@ def solution(expression):
     priority = [('*', '+', '-'), ('*', '-', '+'), ('+', '*', '-'), ('+', '-', '*'), ('-', '*', '+'), ('-', '+', '*')]
     
     for prio in priority:
-        calc(prio)
-    
+        res = abs(calc(prio))
+        if res > answer:
+            answer = res
+        
+    print(answer)
     return answer
