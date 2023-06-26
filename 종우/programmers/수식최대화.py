@@ -3,8 +3,6 @@
 
 from collections import deque
 
-from collections import deque
-
 def solution(expression):
     
     answer = 0
@@ -15,47 +13,26 @@ def solution(expression):
     def calc(prio):
         operandsQ = deque(operands)
         operatorsQ = deque(operators)
-        final = 0
         
         for p in prio:
             tmpOperands = deque()
             tmpOperators = deque()
-            if p == "*":
-                for o in operatorsQ:
-                    if o == "*":
-                        o1 = operandsQ.popleft()
-                        o2 = operandsQ.popleft()
+            for o in operatorsQ:
+                if p == o:
+                    o1 = operandsQ.popleft()
+                    o2 = operandsQ.popleft()
+                    if p == "*":
                         operandsQ.appendleft(o1*o2)
-                    else:
-                        tmpOperands.append(operandsQ.popleft())
-                        tmpOperators.append(o)
-                tmpOperands.append(operandsQ.popleft())
-                operandsQ = tmpOperands
-                operatorsQ = tmpOperators
-            elif p == "+":
-                for o in operatorsQ:
-                    if o == "+":
-                        o1 = operandsQ.popleft()
-                        o2 = operandsQ.popleft()
+                    elif p == "+":
                         operandsQ.appendleft(o1+o2)
-                    else:
-                        tmpOperands.append(operandsQ.popleft())
-                        tmpOperators.append(o)
-                tmpOperands.append(operandsQ.popleft())
-                operandsQ = tmpOperands
-                operatorsQ = tmpOperators
-            elif p == "-":
-                for o in operatorsQ:
-                    if o == "-":
-                        o1 = operandsQ.popleft()
-                        o2 = operandsQ.popleft()
+                    elif p == "-":
                         operandsQ.appendleft(o1-o2)
-                    else:
-                        tmpOperands.append(operandsQ.popleft())
-                        tmpOperators.append(o)
-                tmpOperands.append(operandsQ.popleft())
-                operandsQ = tmpOperands
-                operatorsQ = tmpOperators
+                else:
+                    tmpOperands.append(operandsQ.popleft())
+                    tmpOperators.append(o)
+            tmpOperands.append(operandsQ.popleft())
+            operandsQ = tmpOperands
+            operatorsQ = tmpOperators
         return operandsQ.popleft()
     
     tmp = ""
