@@ -4,28 +4,32 @@
 from itertools import combinations
 from collections import Counter
 
+from itertools import combinations
+
 def solution(orders, course):
     answer = []
-    combs = []
+    potential_course = [{} for i in range(len(course))]
     
     for order in orders:
-        for i in course:
-            tosort = list(combinations(order, i))
-            for ts in tosort:
-                combs.append(tuple(sorted(list(ts))))
+        for i, n in enumerate(course):
+            combs = combinations(order, n)
+            for c in combs:
+                tmp = "".join(sorted(list(c)))
+                if tmp not in potential_course[i]:
+                    potential_course[i][tmp] = 0
+                potential_course[i][tmp] += 1
     
-    potential = Counter(combs)
-    counter = [0 for i in range(course[-1])]
-    print(potential)
-    for poten in potential:
-        if len(poten) in course:
-            if potential[poten] >= counter[len(poten)-1]:
-                print(counter)
-                print(poten, potential[poten])
-        
-    answer.sort()
+    for i in range(len(course)):
+        sorted_pc = sorted(potential_course[i].items(), key=lambda x:x[1], reverse=True)
+        if sorted_pc:
+            mx = sorted_pc[0][1]
+            for pc in sorted_pc:
+                if pc[1] == mx and pc[1] >= 2:
+                    answer.append(pc[0])
+                else:
+                    break
     
-    return answer
+    return sorted(answer)
 
 # 정답
 def solution_itertools(orders, course):
