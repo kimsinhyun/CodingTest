@@ -1,4 +1,5 @@
-class Solution {
+
+class Sol704 {
     public int search(int[] nums, int target) {
       int n = nums.length;
       int l = 0;
