@@ -1,3 +1,4 @@
+import java.util.*;
 // my attempt: fail
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
@@ -77,7 +78,7 @@ class Solution {
 
 // neetcode solution in java
 
-class Solution {
+class Solution2 {
     public int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> ans = new ArrayList<>();
         
