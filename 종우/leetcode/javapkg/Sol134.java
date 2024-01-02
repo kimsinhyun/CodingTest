@@ -24,7 +24,7 @@ class Solution {
 }
 
 // Solution after neetcode explanation O(n), but only beats 5%
-class Solution {
+class Solution2 {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         int n = gas.length; 
         int sumGas = Arrays.stream(gas).sum();
@@ -46,3 +46,4 @@ class Solution {
         return index;
     }
 }
+
